@@ -6,7 +6,7 @@ const logger = createLogger('debug-composer');
 const debugTools = {
   /**
    * Gets debug settings from localStorage
-   * @returns {string} debug settings
+   * @return {string} debug settings
    */
   getFromLocalStorage() {
     if (typeof localStorage !== 'undefined') {
@@ -17,7 +17,7 @@ const debugTools = {
 
   /**
    * Sets debug settings to localStorage
-   * @param value
+   * @param {string} value debug settings as string
    */
   setToLocalStorage(value) {
     if (typeof localStorage !== 'undefined') {
@@ -40,14 +40,14 @@ const debugTools = {
    * @param {string|number} enable - debug settings level to enable (the same as index in settings object to be set)
    */
   configureDebugger(settings, enable = 'default') {
-    if (!typeof settings === 'object') {
+    if (typeof settings !== 'object') {
       throw new Error(`Expected an object provided as the first argument to configureDebugger function. ${typeof settings} found instead.`);
     }
     if (!settings[enable]) {
       throw new Error(`Key ${enable} not found in settings file provided to configureDebugger method. As a second argument you must provide index from settings object`);
     }
-    if (!typeof settings[enable] === 'object') {
-      throw new Error(`Expected settings.${enable} to be an object. ${typeof setting[enable]} found instead`);
+    if (typeof settings[enable] !== 'object') {
+      throw new Error(`Expected settings.${enable} to be an object. ${typeof settings[enable]} found instead`);
     }
     if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
       logger.warning('It seems that you are using configureDebugger method in node.js or in outdated browser. It will not work as it needs browser environment with localStorage available.');
@@ -116,7 +116,6 @@ const debugTools = {
    * @return {function} function to be used for disabling/enabling namespaces
    */
   changeDebugOption(enable) {
-
     /**
      * Function to be used for disabling/enabling namespaces
      * @param {object} optionsObject - debug options to be edited (as JS object)
@@ -163,7 +162,7 @@ const debugTools = {
           [splitNamespace[0]]: {
             ...newOptions[splitNamespace[0]],
             [splitNamespace[1]]: enable,
-          }
+          },
         };
         // console.log('length!=1', splitNamespace, enable, newOptions);
       }
@@ -201,7 +200,7 @@ const debugTools = {
    */
   getDebugOptions() {
     return this.getDebugOptionsObject(localStorage.getItem('debug'));
-  }
+  },
 };
 
 export default debugTools;

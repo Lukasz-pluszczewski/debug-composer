@@ -2,7 +2,7 @@ import debug from 'debug';
 
 const createLogger = (namespace, addToGlobals = false) => {
   const debugInstances = {};
-  const logger = new Proxy(() => {}, {
+  const logger = new Proxy({}, {
     get(target, name) {
       if (!debugInstances[`${namespace}:${name}`]) {
         debugInstances[`${namespace}:${name}`] = debug(`${namespace}:${name}`);
@@ -17,7 +17,7 @@ const createLogger = (namespace, addToGlobals = false) => {
     } else if (typeof global !== 'undefined') {
       global[globalName] = logger;
     } else {
-      console.warn('Could not find neither window nor global object to add logger to');
+      console.warn('debug-composer:warn', 'Could not find neither window nor global object to add logger to'); // eslint-disable-line no-console
     }
   }
   return logger;

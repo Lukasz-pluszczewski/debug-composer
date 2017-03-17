@@ -5,7 +5,7 @@ Wrapper for [debug](https://github.com/visionmedia/debug) utility that provides 
 
 ## FAQ
 #### Why this exists?
-Just to make calling debug logger methods in a cleaner way and make debug configuration (those in localStorage in browser) much simpler.
+Just to be able to call debug logger methods in a cleaner way and make debug configuration (that in localStorage in browser) much simpler.
 
 #### I found a bug! What should I do?
 Feel free to make a pull request. All contributions are appreciated! 
@@ -32,7 +32,7 @@ logger.someStupendeslyLongMethodNameThatICanUseWithoutDeclaringIt('My message');
 
 #### Good practises with logger
 * Use namespace that is exactly the same as name of your library
-* Try to use methods name wisely:
+* Try to use methods names wisely:
   * if your lib/application has distinctive parts/features use their names as methods
   * if not you can also use methods like warn, info, debug, error, critical etc. to distinguish importance of a message
   

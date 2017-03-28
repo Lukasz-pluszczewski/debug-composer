@@ -26,7 +26,7 @@ const logger = createLogger('yourNamespace');
 logger.info('Not so important message'); // yourNamespace:info Not so important message
 
 // you can use any method
-logger.someStupendeslyLongMethodNameThatICanUseWithoutDeclaringIt('My message');
+logger.someStupendeslyLongMethodNameThatICanUseWithoutEvenDeclaringIt('My message');
 
 ```
 
@@ -38,7 +38,7 @@ logger.someStupendeslyLongMethodNameThatICanUseWithoutDeclaringIt('My message');
   
   
 #### Using configureDebugger method
-> NOTE: configureDebugger method works only in browser (where localStorage is available). You can set these options in node by using DEBUG environment variable.
+> NOTE: configureDebugger method works only in browser (where localStorage is available). You can set these options in node by using [DEBUG environment variable](https://github.com/visionmedia/debug#environment-variables).
 ```javascript
 import { configureDebugger, resetDebugger } from 'debug-composer';
 
@@ -63,3 +63,19 @@ configureDebugger(settings, environment); // if you're using webpack and webpack
 
 ```
 This will create configuration string and save it in localStorage. You will need to reload the page for changes to take effect.
+
+#### Additional logger functionality
+```javascript
+import createLogger from 'debug-composer';
+const logger = createLogger('yourNamespace');
+
+// measure time - method 1 - measuring code executed once, or large part of the code
+logger.time('someName', true); // second param indicates if current time should be logged to console (as yourNamespace:performance). Optional, defaults to false.
+myRenderFunction();
+const timeInMiliseconds = logger.timeEnd('someName', true); // second param indicates if measured time should be logged to console (as yourNamespace:performance). Optional, defaults to true.
+
+// measure time - method 2 - measuring code executed 10000 times
+const timeInMiliseconds = logger.testPerformance(() => {
+  // here goes code to test
+}, 10000, false); // third param indicates if time should be logged to console (as yourNamespace:performance)
+```

@@ -72,10 +72,10 @@ const logger = createLogger('yourNamespace');
 // measure time - method 1 - measuring code executed once, or large part of the code
 logger.time('someName', true); // second param indicates if current time should be logged to console (as yourNamespace:performance). Optional, defaults to false.
 myRenderFunction();
-const timeInMiliseconds = logger.timeEnd('someName', true); // second param indicates if measured time should be logged to console (as yourNamespace:performance). Optional, defaults to true.
+let timeInMiliseconds = logger.timeEnd('someName', true); // second param indicates if measured time should be logged to console (as yourNamespace:performance). Optional, defaults to true.
 
 // measure time - method 2 - measuring code executed 10000 times
-const timeInMiliseconds = logger.testPerformance(() => {
+timeInMiliseconds = logger.testPerformance(() => {
   // here goes code to test
 }, 10000, false); // third param indicates if time should be logged to console (as yourNamespace:performance)
 ```

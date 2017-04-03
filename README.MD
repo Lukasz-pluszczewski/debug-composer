@@ -47,11 +47,6 @@ const settings = {
     '*': true,
     'socket.io-client': false,
     'socket.io-client:*': false,
-    'engine.io-client': false,
-    'engine.io-client:*': false,
-    'socket.io-parser': false,
-    'socket.io-parser:*': false,
-    'mi18n-redux:*': true,
   },
   production: {
     'veryImportantLib:veryImportantLogs': true,
@@ -68,11 +63,6 @@ const settings = {
     '*': true,
     'socket.io-client': false,
     'socket.io-client:*': false,
-    'engine.io-client': false,
-    'engine.io-client:*': false,
-    'socket.io-parser': false,
-    'socket.io-parser:*': false,
-    'mi18n-redux:*': true,
   },
   production: {
     'veryImportantLib:veryImportantLogs': true,
@@ -87,11 +77,6 @@ const settings = {
   '*': true,
   'socket.io-client': false,
   'socket.io-client:*': false,
-  'engine.io-client': false,
-  'engine.io-client:*': false,
-  'socket.io-parser': false,
-  'socket.io-parser:*': false,
-  'mi18n-redux:*': true,
 };
 
 configureDebugger(settings); // just settings object will be applied when environment is not provided

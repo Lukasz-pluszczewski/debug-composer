@@ -49,7 +49,7 @@ const createTooler = (namespace, debugInstances) => {
       }
 
       return time;
-    }
+    },
   };
 };
 

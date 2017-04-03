@@ -41,4 +41,34 @@ describe('debugTools', () => {
     expect(localStorage.setItem).to.be.called.once;
     expect(localStorage.setItem).to.be.calledWith('debug', 'enabledLib:*,partialLib:enabledNamespace,-paritalLib:disabledNamespace,otherLib,otherLib:*');
   });
+  it('configureDebugger should set default options when provided with indefined environment', () => {
+    const settings = {
+      default: {
+        'enabledLib:*': true,
+        'partialLib:enabledNamespace': true,
+        'paritalLib:disabledNamespace': false,
+        'otherLib': true,
+      },
+      production: {
+        lib: false,
+      }
+    };
+    const key = undefined;
+
+    debugTools.configureDebugger(settings, key);
+    expect(localStorage.setItem).to.be.called.once;
+    expect(localStorage.setItem).to.be.calledWith('debug', 'enabledLib:*,partialLib:enabledNamespace,-paritalLib:disabledNamespace,otherLib,otherLib:*');
+  });
+  it('configureDebugger should set options when environment is not provided', () => {
+    const settings = {
+      'enabledLib:*': true,
+      'partialLib:enabledNamespace': true,
+      'paritalLib:disabledNamespace': false,
+      'otherLib': true,
+    };
+
+    debugTools.configureDebugger(settings);
+    expect(localStorage.setItem).to.be.called.once;
+    expect(localStorage.setItem).to.be.calledWith('debug', 'enabledLib:*,partialLib:enabledNamespace,-paritalLib:disabledNamespace,otherLib,otherLib:*');
+  });
 });

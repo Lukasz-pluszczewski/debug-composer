@@ -37,26 +37,35 @@ const debugTools = {
   /**
    * Sets provided settings as string to localStorage
    * @param {object} settings - debug settings as js object
-   * @param {string|number} enable - debug settings level to enable (the same as index in settings object to be set)
+   * @param {string|number} env - debug settings level to env (the same as index in settings object to be set)
    */
-  configureDebugger(settings, enable = 'default') {
+  configureDebugger(settings, env = 'default') {
+    const envProvided = arguments.length > 1;
+    let settingsToApply = settings;
+
     if (typeof settings !== 'object') {
       throw new Error(`Expected an object provided as the first argument to configureDebugger function. ${typeof settings} found instead.`);
     }
-    if (!settings[enable]) {
-      throw new Error(`Key ${enable} not found in settings file provided to configureDebugger method. As a second argument you must provide index from settings object`);
+
+    // checking if we got env = undefined or we did not get env at all
+    if (envProvided) {
+      if (!settings[env]) {
+        throw new Error(`Key ${env} not found in settings file provided to configureDebugger method. As a second argument you must provide index from settings object`);
+      }
+      if (typeof settings[env] !== 'object') {
+        throw new Error(`Expected settings.${env} to be an object. ${typeof settings[env]} found instead`);
+      }
+      settingsToApply = settings[env];
     }
-    if (typeof settings[enable] !== 'object') {
-      throw new Error(`Expected settings.${enable} to be an object. ${typeof settings[enable]} found instead`);
-    }
+
     if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
       logger.warning('It seems that you are using configureDebugger method in node.js or in outdated browser. It will not work as it needs browser environment with localStorage available.');
     }
 
-    logger.info(`Setting debug for ${enable}`);
+    logger.info(envProvided ? `Setting debug for ${env}` : 'Setting debug');
 
     let options = debugTools.getDebugOptionsObject(debugTools.getFromLocalStorage());
-    _.forEach(settings[enable], (level, namespace) => {
+    _.forEach(settingsToApply, (level, namespace) => {
       options = debugTools.changeDebugOption(level)(options, namespace);
     });
     debugTools.setToLocalStorage(debugTools.getDebugOptionsString(options));

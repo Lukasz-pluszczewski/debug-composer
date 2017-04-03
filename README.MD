@@ -61,10 +61,7 @@ const settings = {
 resetDebugger(); // we can remove all previous configuration from localStorage
 configureDebugger(settings, environment); // if you're using webpack and webpack.DefinePlugin you can make process.env.NODE_ENV available to the browser
 
-```
-
-```javascript
-import { configureDebugger, resetDebugger } from 'debug-composer';
+/* ==================================== */
 
 const settings = {
   default: {
@@ -83,10 +80,8 @@ const settings = {
 };
 
 configureDebugger(settings, undefined); // default settings will be applied
-```
 
-```javascript
-import { configureDebugger, resetDebugger } from 'debug-composer';
+/* ====================================== */
 
 const settings = {
   '*': true,
@@ -101,6 +96,7 @@ const settings = {
 
 configureDebugger(settings); // just settings object will be applied when environment is not provided
 ```
+
 This will create configuration string and save it in localStorage. You will need to reload the page for changes to take effect.
 
 #### Additional logger functionality

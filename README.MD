@@ -98,4 +98,8 @@ let timeInMiliseconds = logger.timeEnd('someName', true); // second param indica
 timeInMiliseconds = logger.testPerformance(() => {
   // here goes code to test
 }, 10000, false); // third param indicates if time should be logged to console (as yourNamespace:performance)
+
+// get stacktrace
+logger.debug(logger.stacktrace()); // array of strings
+logger.debug(logger.stacktrace(true)); // array of objects
 ```

@@ -36,7 +36,7 @@ You can use one of predefined methods:
 Or add you own:
 ```javascript
 logger.add('someCustomMethod');
-logger.somCustomMethod('My message');
+logger.someCustomMethod('My message');
 ```
 
 #### Good practices with logger

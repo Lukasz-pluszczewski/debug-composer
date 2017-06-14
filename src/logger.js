@@ -83,29 +83,22 @@ const createTooler = (namespace, debugInstances) => {
 const createLogger = (namespace, addToGlobals = false) => {
   const debugInstances = {};
   const tooler = createTooler(namespace, debugInstances);
-  let logger = {};
-  if (typeof Proxy === 'undefined') {
-    console.warn('You browser does not support Proxy object. Logger created by debug-composer will not allow you to use custom methods (only tools and log, warn, error and info are available');
-    logger = {
-      ...tooler,
-      log: debug(`${namespace}:log`),
-      info: debug(`${namespace}:info`),
-      warn: debug(`${namespace}:warn`),
-      error: debug(`${namespace}:error`),
-    };
-  } else {
-    logger = new Proxy({}, {
-      get(target, name) {
-        if (tooler[name]) {
-          return tooler[name];
-        }
-        if (!debugInstances[`${namespace}:${name}`]) {
-          debugInstances[`${namespace}:${name}`] = debug(`${namespace}:${name}`);
-        }
-        return (...args) => debugInstances[`${namespace}:${name}`](...args);
-      },
-    });
-  }
+
+  const logger = {
+    ...tooler,
+    log: debug(`${namespace}:log`),
+    info: debug(`${namespace}:info`),
+    warn: debug(`${namespace}:warn`),
+    error: debug(`${namespace}:error`),
+    debug: debug(`${namespace}:debug`),
+    add: name => {
+      if (Array.isArray(name)) {
+        return name.forEach(name => logger[name] = debug(`${namespace}:${name}`));
+      }
+      logger[name] = debug(`${namespace}:${name}`);
+    },
+  };
+
   const globalName = typeof addToGlobals === 'string' ? addToGlobals : 'logger';
   if (addToGlobals) {
     if (typeof window !== 'undefined') {

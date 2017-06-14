@@ -1,5 +1,8 @@
+#### 1.0.0
+ * removed Proxy, changed syntax, improved browser compatibility
+
 #### 0.3.1
- * Checking if Proxy object exists in older browsers (it will just show the warning message)
+ * checking if Proxy object exists in older browsers (it will just show the warning message)
 
 #### 0.3.0
  * added stacktrace logger method

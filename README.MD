@@ -24,10 +24,19 @@ const logger = createLogger('yourNamespace');
 
 // this will be same as calling debug(yourNamespace:info)('Not so important message')
 logger.info('Not so important message'); // yourNamespace:info Not so important message
+```
 
-// you can use any method
-logger.someStupendeslyLongMethodNameThatICanUseWithoutEvenDeclaringIt('My message');
+You can use one of predefined methods:
+ * log
+ * info
+ * warn
+ * error
+ * debug
 
+Or add you own:
+```
+logger.add('someCustomMethod');
+logger.somCustomMethod('My message');
 ```
 
 #### Good practises with logger

@@ -50,6 +50,33 @@ const createTooler = (namespace, debugInstances) => {
 
       return time;
     },
+    stacktrace(asObject = false) {
+      let trace = (new Error()).stack.split('\n').reverse().slice(0, -2).reverse();
+      const regexp = new RegExp(/at ([\w.]*) \((<?.*?>?)\??:(\d*):(\d*)\)/);
+      trace = trace.map(el => {
+        const matched = regexp.exec(el);
+        if (matched) {
+          if (asObject) {
+            return {
+              method: matched[1],
+              file: matched[2].split('/').pop(),
+              line: parseInt(matched[3]),
+              column: parseInt(matched[4]),
+              filePath: matched[2],
+              trace: el,
+            };
+          }
+          return `${matched[1]} in '${matched[2].split('/').pop()}' at ${matched[3]}:${matched[4]}`;
+        }
+        if (asObject) {
+          return {
+            traceEl: el,
+          };
+        }
+        return el;
+      });
+      return trace;
+    },
   };
 };
 

@@ -39,7 +39,7 @@ logger.add('someCustomMethod');
 logger.somCustomMethod('My message');
 ```
 
-#### Good practises with logger
+#### Good practices with logger
 * Use namespace that is exactly the same as name of your library
 * Try to use methods names wisely:
   * if your lib/application has distinctive parts/features use their names as methods

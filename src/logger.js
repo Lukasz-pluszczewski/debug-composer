@@ -84,7 +84,7 @@ const createLogger = (namespace, addToGlobals = false) => {
   const debugInstances = {};
   const tooler = createTooler(namespace, debugInstances);
   let logger = {};
-  if (typeof Proxy !== 'undefined') {
+  if (typeof Proxy === 'undefined') {
     console.warn('You browser does not support Proxy object. Logger created by debug-composer will not allow you to use custom methods (only tools and log, warn, error and info are available');
     logger = {
       ...tooler,

@@ -24,16 +24,25 @@ const logger = createLogger('yourNamespace');
 
 // this will be same as calling debug(yourNamespace:info)('Not so important message')
 logger.info('Not so important message'); // yourNamespace:info Not so important message
-
-// you can use any method
-logger.someStupendeslyLongMethodNameThatICanUseWithoutEvenDeclaringIt('My message');
-
 ```
 
-#### Good practises with logger
+You can use one of predefined methods:
+ * log
+ * info
+ * warn
+ * error
+ * debug
+
+Or add you own:
+```javascript
+logger.add('someCustomMethod');
+logger.someCustomMethod('My message');
+```
+
+#### Good practices with logger
 * Use namespace that is exactly the same as name of your library
 * Try to use methods names wisely:
-  * if your lib/application has distinctive parts/features use their names as methods
+  * if your lib/application has distinctive parts/features (e.g. AuthService or name of the react component) use their names as methods
   * if not you can also use methods like warn, info, debug, error, critical etc. to distinguish importance of a message
   
   

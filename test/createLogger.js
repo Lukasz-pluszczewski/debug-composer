@@ -16,8 +16,10 @@ describe('createLogger function', () => {
   after(() => {
     createLogger.__ResetDependency__('debug');
   });
-  it('should create logger object on which it\'s possible to trigger any method', () => {
+  it('should create logger object on which it\'s possible to trigger added methods', () => {
     const createdLogger = createLogger('testNamespace');
+    createdLogger.add('myStrangeMethodForTesting');
+    createdLogger.add('myDifferentStrangeMethodForTesting');
     createdLogger.myStrangeMethodForTesting('test message');
     createdLogger.myDifferentStrangeMethodForTesting('another test message');
 
@@ -26,4 +28,8 @@ describe('createLogger function', () => {
     expect(logger).to.be.calledWith('test message');
     expect(logger).to.be.calledWith('another test message');
   });
+  it('should throw an arror when calling non-existing method', () => {
+    const createdLogger = createLogger('testNamespace');
+    expect(() => createdLogger.noneExistingMethod('test message')).to.throw(Error);
+  })
 });

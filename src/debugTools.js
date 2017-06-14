@@ -59,7 +59,7 @@ const debugTools = {
     }
 
     if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
-      logger.warning('It seems that you are using configureDebugger method in node.js or in outdated browser. It will not work as it needs browser environment with localStorage available.');
+      logger.warn('It seems that you are using configureDebugger method in node.js or in outdated browser. It will not work as it needs browser environment with localStorage available.');
     }
 
     logger.info(envProvided ? `Setting debug for ${env}` : 'Setting debug');

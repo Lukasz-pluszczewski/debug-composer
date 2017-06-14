@@ -18,9 +18,10 @@ describe('createLogger function', () => {
   });
   it('should create logger object on which it\'s possible to trigger added methods', () => {
     const createdLogger = createLogger('testNamespace');
-    createdLogger.add('myStrangeMethodForTesting');
+
+    createdLogger.add('myStrangeMethodForTesting')('test message');
     createdLogger.add('myDifferentStrangeMethodForTesting');
-    createdLogger.myStrangeMethodForTesting('test message');
+
     createdLogger.myDifferentStrangeMethodForTesting('another test message');
 
     expect(debug).to.be.calledWith('testNamespace:myStrangeMethodForTesting');

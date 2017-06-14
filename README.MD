@@ -36,7 +36,14 @@ You can use one of predefined methods:
 Or add you own:
 ```javascript
 logger.add('someCustomMethod');
-logger.someCustomMethod('My message');
+logger.someCustomMethod('My message'); // yourNamespace:someCustomMethod My message
+
+// add returns added method
+logger.add('someOtherMethod')('Another message'); // yourNamespace:someOtherMethod Another message
+
+// you can add more methods at once (but in this case add will not return any of added methods)
+logger.add(['firstMethod', 'secondMethod']);
+logger.secondMethod('Second message'); // yourNamespace:secondMethod Second message
 ```
 
 #### Good practices with logger

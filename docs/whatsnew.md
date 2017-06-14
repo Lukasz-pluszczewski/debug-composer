@@ -1,3 +1,6 @@
+#### 1.1.0
+ * add method now returns added logger
+
 #### 1.0.0
  * removed Proxy, changed syntax, improved browser compatibility
 

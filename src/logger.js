@@ -95,7 +95,7 @@ const createLogger = (namespace, addToGlobals = false) => {
       if (Array.isArray(name)) {
         return name.forEach(name => logger[name] = debug(`${namespace}:${name}`));
       }
-      logger[name] = debug(`${namespace}:${name}`);
+      return logger[name] = debug(`${namespace}:${name}`);
     },
   };
 

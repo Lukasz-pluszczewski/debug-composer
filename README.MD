@@ -34,7 +34,7 @@ You can use one of predefined methods:
  * debug
 
 Or add you own:
-```
+```javascript
 logger.add('someCustomMethod');
 logger.somCustomMethod('My message');
 ```

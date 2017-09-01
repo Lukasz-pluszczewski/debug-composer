@@ -1,3 +1,7 @@
+#### 1.1.1
+ * updated dependencies
+ * now we use Debug 3.0.1
+
 #### 1.1.0
  * add method now returns added logger
 

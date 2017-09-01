@@ -5,7 +5,7 @@ const pkg = require('./package.json');
 const external = Object.keys(pkg.dependencies);
 
 export default {
-  entry: 'src/index.js',
+  input: 'src/index.js',
   plugins: [
     babel(babelrc({
       addModuleOptions: false,
@@ -17,17 +17,18 @@ export default {
     lodash: '_',
     debug: 'debug',
   },
-  targets: [
+  output: [
     {
-      dest: pkg.main,
+      file: pkg.main,
       format: 'umd',
-      moduleName: 'mi18n',
-      sourceMap: true,
+      name: 'mi18n',
+      sourcemap: true,
+      exports: 'named',
     },
     {
-      dest: pkg.module,
+      file: pkg.module,
       format: 'es',
-      sourceMap: true,
+      sourcemap: true,
     },
   ],
 };

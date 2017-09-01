@@ -19,9 +19,14 @@ describe('debugTools', () => {
   after(() => {
     global.localStorage = temp;
   });
+  beforeEach(() => {
+    global.localStorage.setItem.reset();
+    global.localStorage.getItem.reset();
+    global.localStorage.removeItem.reset();
+  });
   it('resetDebugger should remove debug options from localStorage', () => {
     debugTools.clearLocalStorage();
-    expect(localStorage.removeItem).to.have.been.called.once;
+    expect(localStorage.removeItem).to.have.been.calledOnce;
   });
   it('configureDebugger should set options for given environment', () => {
     const settings = {
@@ -38,7 +43,7 @@ describe('debugTools', () => {
     const key = 'test';
 
     debugTools.configureDebugger(settings, key);
-    expect(localStorage.setItem).to.be.called.once;
+    expect(localStorage.setItem).to.be.calledOnce;
     expect(localStorage.setItem).to.be.calledWith('debug', 'enabledLib:*,partialLib:enabledNamespace,-paritalLib:disabledNamespace,otherLib,otherLib:*');
   });
   it('configureDebugger should set default options when provided with indefined environment', () => {
@@ -56,7 +61,7 @@ describe('debugTools', () => {
     const key = undefined;
 
     debugTools.configureDebugger(settings, key);
-    expect(localStorage.setItem).to.be.called.once;
+    expect(localStorage.setItem).to.be.calledOnce;
     expect(localStorage.setItem).to.be.calledWith('debug', 'enabledLib:*,partialLib:enabledNamespace,-paritalLib:disabledNamespace,otherLib,otherLib:*');
   });
   it('configureDebugger should set options when environment is not provided', () => {
@@ -68,7 +73,7 @@ describe('debugTools', () => {
     };
 
     debugTools.configureDebugger(settings);
-    expect(localStorage.setItem).to.be.called.once;
+    expect(localStorage.setItem).to.be.calledOnce;
     expect(localStorage.setItem).to.be.calledWith('debug', 'enabledLib:*,partialLib:enabledNamespace,-paritalLib:disabledNamespace,otherLib,otherLib:*');
   });
 });

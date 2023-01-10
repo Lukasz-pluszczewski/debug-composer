@@ -48,7 +48,7 @@
     "sinon-chai": "2.8.0"
   },
   "dependencies": {
-    "debug": "^2.6.8",
+    "debug": "^3.1.0",
     "lodash": "^4.17.4"
   }
 }
